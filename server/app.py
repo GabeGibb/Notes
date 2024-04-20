@@ -20,13 +20,12 @@ def get_users():
 @app.route('/users', methods=['POST'])
 def create_user():
     username = request.json['username']
-    password = request.json['password']
     existing_user = db.query("SELECT * FROM users WHERE username = %s;", (username,))
     if existing_user:
         return {"error": "Username is already taken"}, 400
     db.insert(
-        "INSERT INTO users (username, password) VALUES (%s, %s);",
-        (username, password)
+        "INSERT INTO users (username) VALUES (%s);",
+        (username,)
     )
     return {"success": True}
 
@@ -38,15 +37,19 @@ def get_notes():
     longitude = request.args.get('longitude', type=float)
     if latitude is None or longitude is None:
         return {"notes": notes}
-    
-    nearby_notes = []
+
+    distance_limit = request.args.get('distance', type=float, default=1000)  # default distance limit is 500 feet
+    notes_within_distance = []
     for note in notes:
         note_latitude = note['latitude']
         note_longitude = note['longitude']
         distance = haversine((latitude, longitude), (note_latitude, note_longitude), unit=Unit.FEET)
-        if distance <= 500:
-            nearby_notes.append(note)
-    return {"notes": nearby_notes}
+        if distance <= distance_limit:
+            note['latitude_distance_feet'] = haversine((latitude, longitude), (note_latitude, longitude), unit=Unit.FEET) if note_latitude >= latitude else -haversine((latitude, longitude), (note_latitude, longitude), unit=Unit.FEET)
+            note['longitude_distance_feet'] = haversine((latitude, longitude), (latitude, note_longitude), unit=Unit.FEET) if note_longitude >= longitude else -haversine((latitude, longitude), (latitude, note_longitude), unit=Unit.FEET)
+            note['distance'] = distance
+            notes_within_distance.append(note)
+    return {"notes": notes_within_distance}
 
 @app.route('/notes', methods=['POST'])
 def create_note():
@@ -60,7 +63,8 @@ def create_note():
     )
     return {"success": True}    
 
-@app.route('/delete_notes')
-def delete_notes():
-    db.delete_all("notes")
-    return {"success": True}
+# @app.route('/delete_all')
+# def delete_notes():
+#     db.delete_all("notes")
+#     db.delete_all("users")
+#     return {"success": True}
