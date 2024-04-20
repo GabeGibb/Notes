@@ -1,12 +1,12 @@
 from flask import Flask, request
-from flask_cors import CORS
+# from flask_cors import CORS
 from db import db
 from haversine import haversine, Unit
 
 app = Flask(__name__)
 
 # Allow CORS for all domains on all routes
-CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/')
 def hello_world():
