@@ -3,3 +3,4 @@ Flask-Cors==4.0.0
 psycopg2==2.9.9
 haversine==2.8.1
 Gunicorn
+Werkzeug==2.2.2
