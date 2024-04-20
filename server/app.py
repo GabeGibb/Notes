@@ -12,6 +12,25 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 def hello_world():
     return 'Hello, World!'
 
+@app.route('/users')
+def get_users():
+    users = db.query("SELECT * FROM users;")
+    return {"users": users}
+
+@app.route('/users', methods=['POST'])
+def create_user():
+    username = request.json['username']
+    password = request.json['password']
+    existing_user = db.query("SELECT * FROM users WHERE username = %s;", (username,))
+    if existing_user:
+        return {"error": "Username is already taken"}, 400
+    db.insert(
+        "INSERT INTO users (username, password) VALUES (%s, %s);",
+        (username, password)
+    )
+    return {"success": True}
+
+
 @app.route('/notes')
 def get_notes():
     notes = db.query("SELECT * FROM notes;")
