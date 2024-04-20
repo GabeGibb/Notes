@@ -16,4 +16,5 @@ body, html { margin: 0; height: 100%; overflow: hidden; }
 
 #coordinates{
     z-index: 9000;
+    position: absolute;
 }
