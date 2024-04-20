@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        'light-green': "#8EB567",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
