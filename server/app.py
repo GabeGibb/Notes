@@ -38,7 +38,7 @@ def get_notes():
     if latitude is None or longitude is None:
         return {"notes": notes}
 
-    distance_limit = request.args.get('distance', type=float, default=1000)  # default distance limit is 500 feet
+    distance_limit = request.args.get('distance', type=float, default=1000000000)  # default distance limit is 500 feet
     notes_within_distance = []
     for note in notes:
         note_latitude = note['latitude']
