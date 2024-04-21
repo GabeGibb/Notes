@@ -14,11 +14,9 @@ async function addEntities(lat, lon) {
     for (let i = 0; i < data.notes.length; i++) {  
         let note = data.notes[i];
         let entity = document.createElement('a-plane');
-        let randomX = Math.floor(Math.random() * 50);
-        let randomZ = Math.floor(Math.random() * 50);
-        console.log(randomX, randomZ)
+        let randomX = Math.floor(Math.random() * 100) - 100;
+        let randomZ = Math.floor(Math.random() * 100) - 100;
         entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
-        entity.setAttribute('position', '15 1 -18');
         entity.setAttribute('rotation', '0 0 0');
         entity.setAttribute('width', '4');
         entity.setAttribute('height', '4');
