@@ -151,6 +151,7 @@ const chars = ["/img/bellflowers.png",
 
 createNote.addEventListener('click', function() {  
     curr_index = 0;
+    charCount = 0;
     createNoteDiv = document.createElement('div');
     createNoteDiv.classList.add('createNoteDiv')
     
@@ -220,14 +221,33 @@ createNote.addEventListener('click', function() {
 
             submitButton = document.createElement('input');
             submitButton.type = "submit";
-            submitButton.value = "Submit";
+            submitButton.value = "Post";
             submitButton.classList.add("submitButton");
             createNoteDiv.append(submitButton);
+
+            //char limit
+            limitDiv = document.createElement("div");
+            limitDiv.classList.add("limitDiv");
+            limitDiv.innerHTML = charCount + "/260";
+
+            createNoteDiv.appendChild(limitDiv);
+
+
+
+            inputText.addEventListener('input', function() {
+                charCount = inputText.value.length;
+                limitDiv.innerHTML = charCount + "/260";
+
+                if(inputText.value.length >= 260) {
+                    inputText.value = inputText.value.substring(0, 259);
+                }
+            });
 
             form = document.createElement('form');
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 // handle form submission here
+                console.log("jlsdkf")
             });
 
             form.classList.add("form");
