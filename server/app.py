@@ -27,8 +27,15 @@ def create_user():
         "INSERT INTO users (username) VALUES (%s);",
         (username,)
     )
-    return {"success": True}
+    user_id = db.query("SELECT id FROM users WHERE username = %s;", (username,))[0]['id']
+    return {"success": True, "user_id": user_id}
 
+@app.route('/users/<int:user_id>')
+def update_user(user_id):
+    user = db.query("SELECT * FROM notes WHERE user_id = %s;", (user_id,))
+    if not user:
+        return {"error": "User not found"}, 404
+    return {"messages": user}
 
 @app.route('/notes')
 def get_notes():
@@ -57,9 +64,10 @@ def create_note():
     latitude = request.json['latitude']
     longitude = request.json['longitude']
     user_id = request.json['user_id']
+    imgname = request.json['imgname']
     db.insert(
-        "INSERT INTO notes (user_id, content, latitude, longitude) VALUES (%s, %s, %s, %s);",
-        (user_id, content, latitude, longitude)
+        "INSERT INTO notes (user_id, imgname, content, latitude, longitude) VALUES (%s, %s, %s, %s, %s);",
+        (user_id, imgname, content, latitude, longitude)
     )
     return {"success": True}    
 

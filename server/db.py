@@ -13,7 +13,7 @@ class Database:
             "users",
             """
             id SERIAL PRIMARY KEY,
-            username VARCHAR(255) UNIQUE NOT NULL
+            username TEXT NOT NULL
             """
         )
         self.create_table(
@@ -21,6 +21,7 @@ class Database:
             """
             id SERIAL PRIMARY KEY,
             user_id INTEGER NOT NULL,
+            imgname TEXT NOT NULL,
             content TEXT NOT NULL,
             latitude DOUBLE PRECISION,
             longitude DOUBLE PRECISION,

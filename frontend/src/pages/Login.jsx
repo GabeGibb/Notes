@@ -1,5 +1,34 @@
 import {BackArrow} from '../components/Icons';
+import { useEffect, useState } from 'react';
 export default function Login() {
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        if (localStorage.getItem('user_id') !== null) {
+            window.location.href = '/';
+        }
+    });
+
+    async function createUser(){
+        const response = await fetch('http://127.0.0.1:5000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
+        });
+        const data = await response.json();
+        if (data.error !== undefined) {
+            return;
+        }
+        localStorage.setItem('username', username);
+        localStorage.setItem('user_id', data.user_id);
+        console.log(localStorage.getItem('username'));
+        console.log(localStorage.getItem('user_id'));
+
+        window.location.href = '/explore.html';
+    }
+    
 
 
     return (
@@ -12,9 +41,9 @@ export default function Login() {
                 <img src="login_duck.png" className="m-auto w-56 mb-19" alt="splash"></img>
                 <h2 className="text-4xl mb-4">What should we call you?</h2>
                 <div className="mb-12">
-                    <input className="w-72 align-text-bottom text-center text-base border-b-2 border-light-green h-14" type="text" placeholder="enter your cool username..."></input>
+                    <input className="w-72 align-text-bottom text-center text-base border-b-2 border-light-green h-14" type="text" placeholder="enter your cool username..." onChange={(e) => setUsername(e.target.value)}></input>
                 </div>
-                <button className="btn border-0 rounded-full bg-light-green w-72 shadow-custom" onClick={() => window.location.href = '/login'}>
+                <button className="btn border-0 rounded-full bg-light-green w-72 shadow-custom" onClick={() => createUser()}>
                     <p className="font-Poppins text-white text-sm font-medium">start exploring</p>
                 </button>
                 <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mt-14" width="25" height="11" viewBox="0 0 32 11" fill="none">

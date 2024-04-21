@@ -6,6 +6,14 @@ export default function Home() {
         document.title = "Notes App"
     });
 
+    function routeToPage(){
+        if (localStorage.getItem('user_id') !== null) {
+            window.location.href = '/explore.html';
+        }else{
+            window.location.href = '/login';
+        
+        }
+    }
     return (
         <div data-theme="light" className="h-screen w-screen flex flex-col">
             <div className="m-auto text-center">
@@ -17,7 +25,7 @@ export default function Home() {
                     <SparkleRight className="align-middle"></SparkleRight>
                 </div>
                 <h2 className="text-base font-Poppins mb-14">leave a piece of your heart wherever you go</h2>
-                <button className="btn border-0 rounded-full bg-light-green w-72 shadow-custom" onClick={() => window.location.href = '/login'}>
+                <button className="btn border-0 rounded-full bg-light-green w-72 shadow-custom" onClick={() => routeToPage()}>
                     <p className="font-Poppins text-white text-sm font-medium">start your journey</p>
                 </button>
                 <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mt-14" width="25" height="11" viewBox="0 0 32 11" fill="none">
