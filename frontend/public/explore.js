@@ -293,7 +293,8 @@ function showConfirmation(){
     confirmationDiv.appendChild(confirmationText);
 
     returnWorld = document.createElement('button');
-    returnWorld.innerHTML = "<p className='returnText'>back to world</p>";
+    // returnWorld.innerHTML = "<p className='returnText'>back to world</p>";
+    returnWorld.innerHTML = "back to world";
     returnWorld.classList.add("returnWorld");
     confirmationDiv.appendChild(returnWorld);
     returnWorld.onclick = function() {
