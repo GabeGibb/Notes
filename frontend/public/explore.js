@@ -1,6 +1,7 @@
 async function addEntities(lat, lon) {
     const scene = document.querySelector("a-scene");
 
+    // loadData(lat, lon);
     // Make a GET request
     const response = await fetch(`http://127.0.0.1:5000/notes?latitude=${lat}&longitude=${lon}`);
     const data = await response.json();
@@ -21,9 +22,10 @@ async function addEntities(lat, lon) {
         entity.setAttribute('rotation', `0 ${theta} 0`);
         entity.setAttribute('width', '4');
         entity.setAttribute('height', '4');
+        // entity.setAttribute('material', `src: home_cat.png; transparent: true`);
+
         entity.setAttribute('material', `src: ${note.imgname}; transparent: true`);
         entity.setAttribute('read-note', '');
- 
         entity.dataset.content = note.content;
         entity.dataset.username = note.user.username;
         entity.dataset.imgname = note.imgname;
@@ -61,10 +63,10 @@ window.onload = function () {
     }
 };
 
-const note = document.getElementById('note');
 
 function clickPopup(el){
     const data = el.dataset
+
     noteDiv = document.createElement('div');
     noteDiv.classList.add('noteDiv')
 
@@ -108,7 +110,6 @@ function clickPopup(el){
     document.body.appendChild(noteDiv);
 }
 
-const createNote = document.getElementById("createNote");
 
 const chars = ["/img/bellflowers.png",
                 "/img/cat_calico.png",
@@ -116,13 +117,14 @@ const chars = ["/img/bellflowers.png",
                 "/img/cat_tabby.png",
                 "/img/duck_flower.png",
                 "/img/duck_knife.png",
-                "/img/dumb_dog.PNG",
+                "/img/dumb_dog.png",
                 "/img/frog.png",
                 "/img/mushroom.png",
-                "/img/shiba_stuck.PNG",
+                "/img/shiba_stuck.png",
                 "/img/strawberry_snail.png"];
 
-createNote.addEventListener('click', function() {  
+
+function createNote(){  
     curr_index = 0;
     charCount = 0;
     createNoteDiv = document.createElement('div');
@@ -136,6 +138,9 @@ createNote.addEventListener('click', function() {
     backButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none"><path d="M5.88705 5.00441L9.82601 1.0717C9.94375 0.953971 10.0099 0.79429 10.0099 0.62779C10.0099 0.46129 9.94375 0.301609 9.82601 0.183875C9.70828 0.066142 9.5486 0 9.3821 0C9.2156 0 9.05592 0.066142 8.93819 0.183875L5.00548 4.12283L1.07277 0.183875C0.955038 0.066142 0.795357 1.47826e-07 0.628857 1.49067e-07C0.462357 1.50307e-07 0.302676 0.066142 0.184942 0.183875C0.067209 0.301609 0.00106717 0.46129 0.00106717 0.62779C0.00106717 0.79429 0.067209 0.953971 0.184942 1.0717L4.1239 5.00441L0.184942 8.93712C0.12634 8.99524 0.079827 9.06439 0.0480848 9.14058C0.0163426 9.21677 0 9.29849 0 9.38103C0 9.46357 0.0163426 9.54529 0.0480848 9.62148C0.079827 9.69767 0.12634 9.76682 0.184942 9.82495C0.243066 9.88355 0.312217 9.93006 0.388407 9.96181C0.464598 9.99355 0.546319 10.0099 0.628857 10.0099C0.711395 10.0099 0.793116 9.99355 0.869307 9.96181C0.945497 9.93006 1.01465 9.88355 1.07277 9.82495L5.00548 5.88599L8.93819 9.82495C8.99631 9.88355 9.06546 9.93006 9.14165 9.96181C9.21784 9.99355 9.29956 10.0099 9.3821 10.0099C9.46464 10.0099 9.54636 9.99355 9.62255 9.96181C9.69874 9.93006 9.76789 9.88355 9.82601 9.82495C9.88462 9.76682 9.93113 9.69767 9.96287 9.62148C9.99461 9.54529 10.011 9.46357 10.011 9.38103C10.011 9.29849 9.99461 9.21677 9.96287 9.14058C9.93113 9.06439 9.88462 8.99524 9.82601 8.93712L5.88705 5.00441Z" fill="#5B5B5B"></svg>`;
     backButton.classList.add("backButton")
     createNoteHeader.append(backButton);
+    backButton.onclick = function() {
+        createNoteDiv.remove();
+    }
 
     title = document.createElement('p');
     title.innerHTML = "pick your avatar";
@@ -243,6 +248,13 @@ createNote.addEventListener('click', function() {
                 showConfirmation();
             });
 
+}
+
+document.querySelector('a-scene').addEventListener('click', function() {
+    createNote();
+});
+document.querySelector('a-scene').addEventListener('touchstart', function() {
+    createNote();
 });
 
 function showConfirmation(){
