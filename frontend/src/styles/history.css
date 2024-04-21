@@ -53,6 +53,8 @@
     border-radius: 15px;
     width: 90%;
     height: auto;
+
+    box-shadow: 2px 3px 4px rgba(157, 157, 157, 0.449)
 }
 
 .notesItem {
