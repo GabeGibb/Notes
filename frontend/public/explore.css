@@ -186,4 +186,16 @@ textarea {
     border-width: 0;
     border-radius: 5px;
     width: 75px;
+    cursor:pointer;
+}
+
+.limitDiv{
+    right:10px;
+    position:absolute;
+    bottom:27px;
+    font-size:16px;
+}
+
+.leftArrowDiv, .rightArrowDiv{
+    cursor: pointer;
 }
