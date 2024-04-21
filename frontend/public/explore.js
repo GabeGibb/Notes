@@ -112,7 +112,20 @@ function clickPopup(){
 
 const createNote = document.getElementById("createNote");
 
+const chars = ["/img/bellflowers.png",
+                "/img/cat_calico.png",
+                "/img/cat_leaf.png",
+                "/img/cat_tabby.png",
+                "/img/duck_flower.png",
+                "/img/duck_knife.png",
+                "/img/dumb_dog.PNG",
+                "/img/frog.png",
+                "/img/mushroom.png",
+                "/img/shiba_stuck.PNG",
+                "/img/strawberry_snail.png"];
+
 createNote.addEventListener('click', function() {  
+    curr_index = 0;
     createNoteDiv = document.createElement('div');
     createNoteDiv.classList.add('createNoteDiv')
     
@@ -141,16 +154,71 @@ createNote.addEventListener('click', function() {
         charDiv.appendChild(leftArrowDiv);
 
 
+        charImages = document.createElement('div');
+        charImages.classList.add('charImages');
+        charDiv.appendChild(charImages);
+
+        char = document.createElement('img');
+        char.src= chars[curr_index];
+        charImages.append(char);
+
         rightArrowDiv = document.createElement('div');
         rightArrowDiv.classList.add('rightArrowDiv');
         rightArrowDiv.innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none'><path d='M18.1434 14.8779L11.5401 21.4695C11.4317 21.5789 11.3026 21.6657 11.1605 21.7249C11.0183 21.7841 10.8658 21.8146 10.7118 21.8146C10.5578 21.8146 10.4053 21.7841 10.2631 21.7249C10.1209 21.6657 9.99192 21.5789 9.88343 21.4695C9.66621 21.2509 9.54418 20.9553 9.54418 20.647C9.54418 20.3388 9.66621 20.0431 9.88343 19.8245L15.6584 13.9912L9.88343 8.21621C9.66621 7.99762 9.54418 7.70192 9.54418 7.39371C9.54418 7.08549 9.66621 6.7898 9.88343 6.57121C9.99154 6.46097 10.1204 6.37327 10.2626 6.31319C10.4048 6.25311 10.5574 6.22185 10.7118 6.22121C10.8661 6.22185 11.0188 6.25311 11.161 6.31319C11.3032 6.37327 11.4321 6.46097 11.5401 6.57121L18.1434 13.1629C18.2619 13.2721 18.3564 13.4047 18.421 13.5523C18.4857 13.6999 18.519 13.8593 18.519 14.0204C18.519 14.1815 18.4857 14.3409 18.421 14.4884C18.3564 14.636 18.2619 14.7686 18.1434 14.8779Z' fill='black' fill-opacity='0.2'/></svg>"
         charDiv.appendChild(rightArrowDiv);
+
+        leftArrowDiv.onclick = function() {
+            curr_index--;
+            if (curr_index < 0) {
+                curr_index = 10;
+            }
+            char.src = chars[curr_index];
+        };
+
+        rightArrowDiv.onclick = function() {
+            curr_index++;
+            if (curr_index > 10) {
+                curr_index = 0;
+            }
+            char.src = chars[curr_index];
+        };
+
+            //input
+            inputTextDiv = document.createElement("div");
+            inputTextDiv.classList.add("createNoteText");
+
+            inputText = document.createElement('textarea');
+            inputText.type = "text";
+            inputText.placeholder = "Write a message...";
+            inputText.classList.add("inputText");
+            inputTextDiv.append(inputText);
+
+            submitButton = document.createElement('input');
+            submitButton.type = "submit";
+            submitButton.value = "Submit";
+            submitButton.classList.add("submitButton");
+            createNoteDiv.append(submitButton);
+
+            form = document.createElement('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                // handle form submission here
+            });
+
+            form.classList.add("form");
+            form.appendChild(inputTextDiv);
+            form.appendChild(submitButton);
+            createNoteDiv.appendChild(form);
+
+
+
+
     document.body.appendChild(createNoteDiv);
 
 
-    // linesDiv = document.createElement("div");
-    // linesDiv.classList.add("createLinesDiv");
-    // createNoteDiv.appendChild(linesDiv);
+    linesDiv = document.createElement("div");
+    linesDiv.classList.add("createLinesDiv");
+    createNoteDiv.appendChild(linesDiv);
 
 });
 
