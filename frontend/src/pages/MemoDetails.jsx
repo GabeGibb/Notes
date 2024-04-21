@@ -1,28 +1,49 @@
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/memodetails.css'
 import '../styles/history.css'
 
 export default function MemoDetails() {
-    const navigate = useNavigate();
-    const { id } = useParams();
+    const [memoDetails, setMemoDetails] = React.useState(null);
 
-    // Use the id to fetch and display the details of the memo
-    const memoDetails =
-        { id: 1, views: 0, date: '4/20/24', message: 'Here is a message...', iconSrc: 'img/dumb_dog.PNG' };
+    useEffect(() => {
+        if (memoDetails === null) {
+            document.title = "Notes App"
+            getMemoDetails();
+        }
+    });
 
-    const userName = "Temp Username";
+    async function getMemoDetails() {
+        // Fetch the memo details from the server
+        const id = window.location.pathname.split('/')[2];
+        const response = await fetch(`http://127.0.0.1:5000/notes/${id}`);
+        const data = await response.json();
+        let memo = {};
+        let message = data.message;
+        memo.id = message.id;
+        memo.date = '4/20/24';
+        memo.views = 10;
+        memo.message = message.content;
+        memo.iconSrc = 'img/dumb_dog.PNG';
+        
+        setMemoDetails(memo);
+    }
+
+    if (memoDetails === null) {
+        return <div>Loading...</div>;
+
+    }
+    const userName = localStorage.getItem("username");
 
     return (
         <div data-theme="light" className="h-screen">
-
             {/* <p>ID: {id}</p> */}
             {/* Display other details of the memo */}
 
             <div className="notesTop">
 
                 <div className="exitDiv">
-                    <button className='exitButton' onClick={() => navigate('/history')}></button>
+                    <button className='exitButton' onClick={() => window.location.href = "/history"}></button>
                 </div>
 
                 {/* <div className="exitDiv">

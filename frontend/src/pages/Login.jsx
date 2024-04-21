@@ -3,12 +3,6 @@ import { useEffect, useState } from 'react';
 export default function Login() {
     const [username, setUsername] = useState('');
 
-    useEffect(() => {
-        if (localStorage.getItem('user_id') !== null) {
-            window.location.href = '/';
-        }
-    });
-
     async function createUser(){
         const response = await fetch('http://127.0.0.1:5000/users', {
             method: 'POST',
