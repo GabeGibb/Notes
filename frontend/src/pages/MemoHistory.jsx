@@ -2,22 +2,45 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/history.css'
 export default function MemoHistory() {
+    const [notesList, setNotesList] = React.useState(null);
 
     useEffect(() => {
-        document.title = "Notes App"
+        if (notesList === null) {
+            document.title = "Notes App"
+            getMemoDetails();
+        }
     });
 
-    const notesList = [
-        { id: 1, views: 0, date: '4/20/24', message: 'Here is a message...', iconSrc: 'img/dumb_dog.PNG' },
-        { id: 2, views: 10, date: '4/19/24', message: 'Another message...', iconSrc: 'img/shiba_stuck.PNG' },
+    async function getMemoDetails() {
+        // Fetch the memo details from the server
+        let item = localStorage.getItem('user_id');
+        console.log(item)
+        const response = await fetch(`http://127.0.0.1:5000/users/${item}`);
+        const data = await response.json();
+        let details = []
+        for (let i = 0; i < data.messages.length; i++) {
+            let memo = {};
+            memo.id = data.messages[i].id;
+            memo.date = '4/20/24';
+            memo.views = 10;
+            memo.message = data.messages[i].content;
+            memo.iconSrc = 'img/dumb_dog.PNG';
+            details.push(memo);
+        }
+        setNotesList(details);
+        console.log(data.messages);
+        return data;
+    }
 
-    ];
+    if (notesList === null) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div data-theme="light" className="h-screen">
             <div className="notesTop">
                 <div className="exitDiv">
-                    <button className='exitButton'></button>
+                    <button className='exitButton' onClick={() => window.location.href = "/explore.html"}></button>
                 </div>
 
                 <h1 className="notesTitle">YOUR MEMOS</h1>

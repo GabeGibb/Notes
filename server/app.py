@@ -31,11 +31,14 @@ def create_user():
     return {"success": True, "user_id": user_id}
 
 @app.route('/users/<int:user_id>')
-def update_user(user_id):
+def get_user(user_id):
     user = db.query("SELECT * FROM notes WHERE user_id = %s;", (user_id,))
-    if not user:
-        return {"error": "User not found"}, 404
     return {"messages": user}
+
+@app.route('/notes/<int:id>')
+def get_note(id):
+    note = db.query("SELECT * FROM notes WHERE id = %s;", (id,))
+    return {"message": note[0]}
 
 @app.route('/notes')
 def get_notes():
