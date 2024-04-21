@@ -99,3 +99,17 @@
 .notesDivider {
     border: 1px solid #AF9F78;
 }
+
+.emptyMessage {
+    /* background-color: pink; */
+    padding-left: 30px;
+    height: auto;
+    width: 100%;
+
+    font-size: 1.2em;
+    color: var(--memo-text, #5B5B5B);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

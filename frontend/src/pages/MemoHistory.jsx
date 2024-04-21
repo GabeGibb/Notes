@@ -36,6 +36,30 @@ export default function MemoHistory() {
         return <div>Loading...</div>;
     }
 
+    if (notesList.length === 0) {
+        return (
+            <div data-theme="light" className="h-screen">
+                <div className="notesTop">
+                    <div className="exitDiv">
+                        <button className='exitButton' onClick={() => window.location.href = "/explore.html"}></button>
+                    </div>
+
+                    <h1 className="notesTitle">YOUR MEMOS</h1>
+                </div>
+                <div className="notes">
+                    <img className="notesTape" src="img/tape.png" alt="tape" />
+                    <ul className="notesList">
+                        <li className='notesItem'>
+                            <div className="emptyMessage">
+                                <p>You have not made any memos yet.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div data-theme="light" className="h-screen">
             <div className="notesTop">

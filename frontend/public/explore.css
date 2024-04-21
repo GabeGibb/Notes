@@ -18,11 +18,7 @@ body, html { margin: 0; height: 100%; overflow: hidden; }
     z-index: 100;
     position: absolute;
 }
-#note{
-    z-index: 100;
-    position: absolute;
-    top: 100px;
-}
+
 
 .noteDiv{
     background-color: #fff;
