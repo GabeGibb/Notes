@@ -76,3 +76,11 @@ body, html { margin: 0; height: 100%; overflow: hidden; }
     line-height: 2em;
     left: 13px;
 }
+
+.noteName{
+    z-index: 500;
+    position:absolute;
+    bottom: 5px;
+    right:10px;
+    font-size: 20px;
+}

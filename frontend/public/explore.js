@@ -95,6 +95,14 @@ function clickPopup(){
         noteText.classList.add("noteText");
         noteDiv.append(noteText);
 
+    //name
+        noteName = document.createElement('p');
+        noteName.innerHTML = "- gabe gibb";
+        noteName.classList.add("noteName");
+
+        noteDiv.append(noteName);
+
+
     linesDiv = document.createElement("div");
     linesDiv.classList.add("linesDiv");
     noteDiv.appendChild(linesDiv);
