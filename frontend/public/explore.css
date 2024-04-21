@@ -240,3 +240,33 @@ textarea {
     font-size:16px;
 }
 
+.historyButton{
+    z-index:150;
+    position:absolute;
+    top:15px;
+    right:10px;
+    background-color:transparent;
+    border-width:0px;
+    color:white;
+}
+
+.prompt{
+    z-index: 150;
+    position: absolute;
+    margin:auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    text-align:center;
+
+    color: #FFF;
+    -webkit-text-stroke-width: 3;
+    -webkit-text-stroke-color: var(--brown-accent, #AF9F78);
+    font-family: "Patrick Hand SC";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 38.4px */
+
+    width: 350px;
+}
