@@ -238,7 +238,30 @@ createNote.addEventListener('click', function() {
     linesDiv.classList.add("createLinesDiv");
     createNoteDiv.appendChild(linesDiv);
 
+            submitButton.addEventListener('click', function() {
+                createNoteDiv.style.display = 'none';
+                showConfirmation();
+            });
+
 });
+
+function showConfirmation(){
+    confirmationDiv = document.createElement('div');
+    confirmationDiv.classList.add('confirmationDiv');
+
+    confirmationText = document.createElement('p');
+    confirmationText.innerHTML = "your memo has been successfully posted!";
+    confirmationText.classList.add("confirmationText");
+    confirmationDiv.appendChild(confirmationText);
+
+    returnWorld = document.createElement('button');
+    returnWorld.innerHTML = "<p className='returnText'>back to world</p>";
+    returnWorld.classList.add("returnWorld");
+    confirmationDiv.appendChild(returnWorld);
+
+    document.body.appendChild(confirmationDiv);
+}
+
 
 AFRAME.registerComponent('read-note', {
     schema: {

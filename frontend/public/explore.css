@@ -198,3 +198,44 @@ textarea {
 .leftArrowDiv, .rightArrowDiv{
     cursor: pointer;
 }
+
+.confirmationDiv{
+    background-color: #fff;
+    z-index:200;
+    width: 270px;
+    height: 220px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    border-radius:20px;
+    border: 2px solid #8EB567;
+    transform: translate(-50%, -50%);
+    overflow: hidden; /* Add this line */
+    font-family: 'Patrick Hand SC';
+
+}
+
+.confirmationText{
+    width:200px;
+    margin:auto;
+    text-align:center;
+    top:50px;
+    position:relative;
+    font-size:24px;
+    line-height:21px;
+}
+
+.returnWorld{
+    position:absolute;
+    bottom:50px;
+    border-width:0px;
+    background-color: #FFD9D9;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width:120px;
+    height: 30px;
+    border-radius:5px;
+    font-family:"Patrick Hand SC";
+    font-size:16px;
+}
+
