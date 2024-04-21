@@ -63,3 +63,14 @@ window.onload = function () {
     }
 };
 
+const note = document.getElementById('note');
+
+note.addEventListener('click', function (){
+    noteDiv = document.createElement('div');
+    noteDiv.classList.add('noteDiv')
+    noteDiv.innerHTML = "HI!111";
+    linesDiv = document.createElement("div");
+    linesDiv.classList.add("linesDiv");
+    noteDiv.appendChild(linesDiv);
+    document.body.appendChild(noteDiv);
+});
