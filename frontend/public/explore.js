@@ -5,22 +5,34 @@ var initialLocationsSet = false;
 
 async function addEntities(lat, lon) {
     const scene = document.querySelector('a-scene');
-    
+
     // Make a GET request
-    const response = await fetch(`http://127.0.0.1:5000/notes?latitude=-1&longitude=1.0001`);
+    const response = await fetch(`http://127.0.0.1:5000/notes`);
     const data = await response.json();
     console.log(data)
-    // Use the data to add entities to the scene
-    for (let i = 0; i < data.notes.length; i++) {
-        let note = data.notes[i];
-        const entityEl = document.createElement('a-text');
-        // entityEl.setAttribute('position', `${note.latitude_distance_feet} 2 ${note.longitude_distance_feet}`);
-        // entityEl.setAttribute('value', note.content);
-        // entityEl.setAttribute('look-at', '[camera]');
-        scene.appendChild(entityEl);
-    }
-    console.log(scene)
-
+    for (let i = 0; i < 10; i++) {
+        const offsetLat = lat + (Math.random() - 0.5) * 0.0005;
+        const offsetLon = lon + (Math.random() - 0.5) * 0.0005;
+        let entity = document.createElement('a-entity');
+        entity.setAttribute('material', 'color: red');
+        entity.setAttribute('geometry', 'primitive: box');
+        entity.setAttribute('scale', '10 10 10');
+        entity.setAttribute('gps-new-entity-place', `latitude: ${offsetLat}; longitude: ${offsetLon}`);
+        scene.appendChild(entity);
+      }
+    for (let i = 0; i < data.notes.length; i++) {   
+        // const offsetLat = lat + (Math.random() - 0.5) * 0.0005;
+        // const offsetLon = lon + (Math.random() - 0.5) * 0.0005;
+        // let note = data.notes[i];
+        // let entity = document.createElement('a-entity');
+        // entity.setAttribute('material', 'color: red');
+        // // entity.setAttribute('value', note.content);
+        // entity.setAttribute('geometry', 'primitive: box');
+        // entity.setAttribute('scale', '10 10 10');
+        // entity.setAttribute('gps-new-entity-place', `latitude: ${note.latitude}; longitude: ${note.longitude}`);
+        // scene.appendChild(entity);
+      }
+      console.log(scene)
     // Update the coordinates display
     document.getElementById('coordinates').textContent = `Lat: ${lat.toFixed(5)}, Lon: ${lon.toFixed(5)}`;
 }
