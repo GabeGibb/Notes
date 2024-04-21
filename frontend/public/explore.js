@@ -194,7 +194,7 @@ createNote.addEventListener('click', function() {
 
             submitButton = document.createElement('input');
             submitButton.type = "submit";
-            submitButton.value = "Post";
+            submitButton.value = "post";
             submitButton.classList.add("submitButton");
             createNoteDiv.append(submitButton);
 
