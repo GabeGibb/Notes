@@ -21,10 +21,14 @@ export default function MemoHistory() {
         for (let i = 0; i < data.messages.length; i++) {
             let memo = {};
             memo.id = data.messages[i].id;
-            memo.date = '4/21/24';
-            memo.views = 10;
+            let date = new Date(data.messages[i].date);
+            let formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+            memo.date = formattedDate;
+
+            memo.views = data.messages[i].views;
             memo.message = data.messages[i].content;
             memo.iconSrc = data.messages[i].imgname;
+
             details.push(memo);
         }
         setNotesList(details);

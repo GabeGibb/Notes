@@ -5,9 +5,10 @@ import '../styles/history.css'
 
 export default function MemoDetails() {
     const [memoDetails, setMemoDetails] = React.useState(null);
-
+    const [load, setLoad] = React.useState(true);
     useEffect(() => {
-        if (memoDetails === null) {
+        if (load === true) {
+            setLoad(false);
             document.title = "Notes App"
             getMemoDetails();
         }

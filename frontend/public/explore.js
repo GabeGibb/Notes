@@ -14,7 +14,7 @@ async function addEntities() {
         let note = data.notes[i];
         let entity = document.createElement('a-plane');
         let randomX = Math.floor(Math.random() * 10) - 5;
-        let randomZ = Math.floor(Math.random() * 100) - 50;
+        let randomZ = -1 * Math.floor(Math.random() * 100);
         entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
         let camera = document.querySelector('#camera');
         let position = camera.getAttribute('position');
