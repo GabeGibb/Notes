@@ -117,10 +117,10 @@ const chars = ["/img/bellflowers.png",
                 "/img/cat_tabby.png",
                 "/img/duck_flower.png",
                 "/img/duck_knife.png",
-                "/img/dumb_dog.PNG",
+                "/img/dumb_dog.png",
                 "/img/frog.png",
                 "/img/mushroom.png",
-                "/img/shiba_stuck.PNG",
+                "/img/shiba_stuck.png",
                 "/img/strawberry_snail.png"];
 
 
@@ -246,6 +246,9 @@ function createNote(){
 }
 
 document.querySelector('a-scene').addEventListener('click', function() {
+    createNote();
+});
+document.querySelector('a-scene').addEventListener('touchstart', function() {
     createNote();
 });
 
