@@ -37,8 +37,11 @@ def get_user(user_id):
 
 @app.route('/notes/<int:id>')
 def get_note(id):
-    note = db.query("SELECT * FROM notes WHERE id = %s;", (id,))
-    return {"message": note[0]}
+    notes = db.query("SELECT * FROM notes WHERE id = %s;", (id,))
+    for note in notes:
+        user = db.query("SELECT * FROM users WHERE id = %s;", (note['user_id'],))
+        note['user'] = user[0] if user else None
+    return {"message": notes[0]}
 
 @app.route('/notes')
 def get_notes():

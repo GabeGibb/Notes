@@ -8,12 +8,12 @@ export default function Home() {
 
     function routeToPage(){
         window.location.href = '/login';
-        if (localStorage.getItem('user_id') !== null) {
-            window.location.href = '/explore.html';
-        }else{
-            window.location.href = '/login';
+        // if (localStorage.getItem('user_id') !== null) {
+        //     window.location.href = '/explore.html';
+        // }else{
+        //     window.location.href = '/login';
         
-        }
+        // }
     }
     return (
         <div data-theme="light" className="h-screen w-screen flex flex-col">

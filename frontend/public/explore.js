@@ -1,23 +1,3 @@
-
-// async function setData(){
-//     const response = await fetch(`http://127.0.0.1:5000/notes?latitude=${lat}&longitude=${lon}`);
-//     const data = await response.json();
-//     const planes = document.querySelectorAll('a-plane');
-//     for (let i = 0; i < planes.length; i++) {
-//         let entity = planes[i];
-//         let note = data.notes[i];
-//         entity.setAttribute('material', `src: ${note.imgname}; transparent: true`);
-//         entity.dataset.content = note.content;
-//         entity.dataset.username = note.user.username;
-//         entity.dataset.imgname = note.imgname;
-//         entity.dataset.distance = note.distance;
-//         let date = new Date(note.date);
-//         let formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
-//         entity.dataset.date = formattedDate;
-//     }
-    
-// }
-
 async function addEntities(lat, lon) {
     const scene = document.querySelector("a-scene");
 
@@ -30,7 +10,7 @@ async function addEntities(lat, lon) {
     for (let i = 0; i < data.notes.length; i++) {  
         let note = data.notes[i];
         let entity = document.createElement('a-plane');
-        let randomX = Math.floor(Math.random() * 100) - 50;
+        let randomX = Math.floor(Math.random() * 10) - 5;
         let randomZ = Math.floor(Math.random() * 100) - 50;
         entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
         let camera = document.querySelector('#camera');
@@ -38,19 +18,12 @@ async function addEntities(lat, lon) {
         let dx = position.x - randomX;
         let dz = position.z - randomZ;
         let theta = Math.atan2(dz, dx);
-        // theta *= 180 / Math.PI; // Convert from radians to degrees
         entity.setAttribute('rotation', `0 ${theta} 0`);
-        // entity.setAttribute('rotation', '0 0 0');
         entity.setAttribute('width', '4');
         entity.setAttribute('height', '4');
         entity.setAttribute('material', `src: ${note.imgname}; transparent: true`);
-        entity.setAttribute('material', `src: img/shiba_stuck.png; transparent: true`);
-
         entity.setAttribute('read-note', '');
-        entity.setAttribute('do-something-once-loaded', '');
-        entity.setAttribute('cursor-listener', '');
-        entity.setAttribute('look-at', '#camera');
-
+ 
         entity.dataset.content = note.content;
         entity.dataset.username = note.user.username;
         entity.dataset.imgname = note.imgname;
@@ -253,20 +226,13 @@ AFRAME.registerComponent('read-note', {
     },
 
     init: function () {
-      var data = this.data;
       var el = this.el;  // <a-box>
-      var defaultColor = el.getAttribute('material').color;
      
       el.addEventListener('mouseenter', function () {
         setTimeout(() => {
             clickPopup(el);
         }, 1000);
 
-        // el.setAttribute('color', data.color);
-      });
-
-      el.addEventListener('mouseleave', function () {
-        el.setAttribute('color', defaultColor);
       });
 
     }
