@@ -67,3 +67,12 @@ body, html { margin: 0; height: 100%; overflow: hidden; }
     font-size: 16px;
     
 }
+
+.noteText{
+    font-size: 16px;
+    position:absolute;
+    z-index: 500;
+    top: 52px;
+    line-height: 2em;
+    left: 13px;
+}
