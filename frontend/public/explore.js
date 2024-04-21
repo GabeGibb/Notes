@@ -1,4 +1,6 @@
-async function addEntities(lat, lon) {
+let lat, lon;
+
+async function addEntities() {
     const scene = document.querySelector("a-scene");
 
     // loadData(lat, lon);
@@ -45,7 +47,9 @@ function updateLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        addEntities(latitude, longitude);
+        lat =latitude;
+        lon = longitude;
+        addEntities();
     }, function (error) {
         console.error("Geolocation error: " + error.message);
     }, {
@@ -81,6 +85,8 @@ function clickPopup(el){
         backButton.onclick = function() {
             noteDiv.remove();
         }
+        backButton.addEventListener('touchstart', function() {noteDiv.remove();});
+
 
     //date inside noteHeader
         noteDate = document.createElement('p');
@@ -124,7 +130,7 @@ const chars = ["/img/bellflowers.png",
                 "/img/strawberry_snail.png"];
 
 
-function createNote(){  
+async function createNote(){  
     curr_index = 0;
     charCount = 0;
     createNoteDiv = document.createElement('div');
@@ -141,6 +147,7 @@ function createNote(){
     backButton.onclick = function() {
         createNoteDiv.remove();
     }
+    backButton.addEventListener('touchstart', function() {createNoteDiv.remove();});
 
     title = document.createElement('p');
     title.innerHTML = "pick your avatar";
@@ -224,8 +231,27 @@ function createNote(){
             form = document.createElement('form');
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                // handle form submission here
-                console.log("jlsdkf")
+                let noteContent = inputText.value;
+
+                fetch('http://127.0.0.1:5000/notes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ content: noteContent,
+                        latitude: lat,
+                        longitude: lon,
+                        user_id: localStorage.getItem("user_id"),
+                        imgname: chars[curr_index]
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
             });
 
             form.classList.add("form");
@@ -270,6 +296,10 @@ function showConfirmation(){
     returnWorld.innerHTML = "<p className='returnText'>back to world</p>";
     returnWorld.classList.add("returnWorld");
     confirmationDiv.appendChild(returnWorld);
+    returnWorld.onclick = function() {
+        confirmationDiv.remove();
+    }
+    returnWorld.addEventListener('touchstart', function() {confirmationDiv.remove();});
 
     document.body.appendChild(confirmationDiv);
 }

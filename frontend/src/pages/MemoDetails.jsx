@@ -64,7 +64,7 @@ export default function MemoDetails() {
                         <span>{memoDetails.date}</span>
                     </div>
                     <hr className='notesDivider' />
-                    <img className="detailsIcon" src={"/" + memoDetails.iconSrc} alt="note icon" />
+                    <img className="detailsIcon" src={memoDetails.iconSrc} alt="note icon" />
                     <hr className='notesDivider' />
                     <div id="detailsMessage" className='detailsMessage'>
                         <span>{memoDetails.message}</span>
