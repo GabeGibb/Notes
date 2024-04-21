@@ -1,9 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/memodetails.css'
 import '../styles/history.css'
 
 export default function MemoDetails() {
+    const navigate = useNavigate();
     const { id } = useParams();
 
     // Use the id to fetch and display the details of the memo
@@ -19,9 +20,14 @@ export default function MemoDetails() {
             {/* Display other details of the memo */}
 
             <div className="notesTop">
+
                 <div className="exitDiv">
-                    <button className='exitButton'></button>
+                    <button className='exitButton' onClick={() => navigate('/history')}></button>
                 </div>
+
+                {/* <div className="exitDiv">
+                    <button className='exitButton'></button>
+                </div> */}
 
                 <h1 className="notesTitle">YOUR MEMO</h1>
             </div>
