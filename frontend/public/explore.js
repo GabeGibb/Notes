@@ -10,13 +10,19 @@ async function addEntities(lat, lon) {
     const response = await fetch(`http://127.0.0.1:5000/notes?latitude=${lat}&longitude=${lon}`);
     const data = await response.json();
     console.log(data)
-    htmlContent = ''
+    // let entities = document.getElementsByClassName('adjust')
+    // for (var i = 0; i < entities.length; i++) {
+    //      let entity =entities[i]
+    //     let randomX = Math.floor(Math.random() * 100) - 100;
+    //     let randomZ = Math.floor(Math.random() * 100) - 100;
+    //     entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
+    // }
     for (let i = 0; i < data.notes.length; i++) {  
         let note = data.notes[i];
         let entity = document.createElement('a-plane');
         let randomX = Math.floor(Math.random() * 100) - 100;
         let randomZ = Math.floor(Math.random() * 100) - 100;
-        entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
+        entity.setAttribute('position', `0 1 ${randomZ}`);
         entity.setAttribute('rotation', '0 0 0');
         entity.setAttribute('width', '4');
         entity.setAttribute('height', '4');
@@ -24,13 +30,14 @@ async function addEntities(lat, lon) {
         entity.setAttribute('read-note', '');
         entity.setAttribute('cursor-listener', '');
 
+        entity.dataset.content = note.content;
+        entity.dataset.imgname = note.imgname;
+        entity.dataset.distance = note.distance;
+
+
         scene.appendChild(entity)
 
       }
-    var div = document.createElement('div');
-    div.innerHTML = htmlContent;
-    scene.appendChild(div);
-    console.log(scene)
 
     document.getElementById('coordinates').textContent = `Lat: ${lat.toFixed(5)}, Lon: ${lon.toFixed(5)}`;
 }

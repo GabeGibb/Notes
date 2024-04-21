@@ -7,6 +7,7 @@ export default function Home() {
     });
 
     function routeToPage(){
+        window.location.href = '/login';
         if (localStorage.getItem('user_id') !== null) {
             window.location.href = '/explore.html';
         }else{

@@ -22,6 +22,8 @@ class Database:
             id SERIAL PRIMARY KEY,
             user_id INTEGER NOT NULL,
             imgname TEXT NOT NULL,
+            date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            views INTEGER DEFAULT 100,
             content TEXT NOT NULL,
             latitude DOUBLE PRECISION,
             longitude DOUBLE PRECISION,
