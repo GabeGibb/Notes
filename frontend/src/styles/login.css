@@ -1,0 +1,9 @@
+.user-error {
+    color: #ED7676;
+    /* margin-top: 15px; */
+}
+
+#user-input {
+    margin: 0;
+    margin-left: 20px;
+}

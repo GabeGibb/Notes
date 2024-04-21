@@ -1,7 +1,22 @@
-var initialLocationsSet = false;
 
-
-
+// async function setData(){
+//     const response = await fetch(`http://127.0.0.1:5000/notes?latitude=${lat}&longitude=${lon}`);
+//     const data = await response.json();
+//     const planes = document.querySelectorAll('a-plane');
+//     for (let i = 0; i < planes.length; i++) {
+//         let entity = planes[i];
+//         let note = data.notes[i];
+//         entity.setAttribute('material', `src: ${note.imgname}; transparent: true`);
+//         entity.dataset.content = note.content;
+//         entity.dataset.username = note.user.username;
+//         entity.dataset.imgname = note.imgname;
+//         entity.dataset.distance = note.distance;
+//         let date = new Date(note.date);
+//         let formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+//         entity.dataset.date = formattedDate;
+//     }
+    
+// }
 
 async function addEntities(lat, lon) {
     const scene = document.querySelector("a-scene");
@@ -9,31 +24,40 @@ async function addEntities(lat, lon) {
     // Make a GET request
     const response = await fetch(`http://127.0.0.1:5000/notes?latitude=${lat}&longitude=${lon}`);
     const data = await response.json();
-    console.log(data)
-    // let entities = document.getElementsByClassName('adjust')
-    // for (var i = 0; i < entities.length; i++) {
-    //      let entity =entities[i]
-    //     let randomX = Math.floor(Math.random() * 100) - 100;
-    //     let randomZ = Math.floor(Math.random() * 100) - 100;
-    //     entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
-    // }
+
+    // const data = {}
+    // data.notes = [1,2,3,4,5]
     for (let i = 0; i < data.notes.length; i++) {  
         let note = data.notes[i];
         let entity = document.createElement('a-plane');
-        let randomX = Math.floor(Math.random() * 100) - 100;
-        let randomZ = Math.floor(Math.random() * 100) - 100;
-        entity.setAttribute('position', `0 1 ${randomZ}`);
-        entity.setAttribute('rotation', '0 0 0');
+        let randomX = Math.floor(Math.random() * 100) - 50;
+        let randomZ = Math.floor(Math.random() * 100) - 50;
+        entity.setAttribute('position', `${randomX} 1 ${randomZ}`);
+        let camera = document.querySelector('#camera');
+        let position = camera.getAttribute('position');
+        let dx = position.x - randomX;
+        let dz = position.z - randomZ;
+        let theta = Math.atan2(dz, dx);
+        // theta *= 180 / Math.PI; // Convert from radians to degrees
+        entity.setAttribute('rotation', `0 ${theta} 0`);
+        // entity.setAttribute('rotation', '0 0 0');
         entity.setAttribute('width', '4');
         entity.setAttribute('height', '4');
-        entity.setAttribute('material', 'src: home_cat.png; transparent: true');
+        entity.setAttribute('material', `src: ${note.imgname}; transparent: true`);
+        entity.setAttribute('material', `src: img/shiba_stuck.png; transparent: true`);
+
         entity.setAttribute('read-note', '');
+        entity.setAttribute('do-something-once-loaded', '');
         entity.setAttribute('cursor-listener', '');
+        entity.setAttribute('look-at', '#camera');
 
         entity.dataset.content = note.content;
+        entity.dataset.username = note.user.username;
         entity.dataset.imgname = note.imgname;
         entity.dataset.distance = note.distance;
-
+        let date = new Date(note.date);
+        let formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+        entity.dataset.date = formattedDate;
 
         scene.appendChild(entity)
 
@@ -66,10 +90,11 @@ window.onload = function () {
 
 const note = document.getElementById('note');
 
-function clickPopup(){
+function clickPopup(el){
+    const data = el.dataset
     noteDiv = document.createElement('div');
     noteDiv.classList.add('noteDiv')
-    
+
     noteHeader = document.createElement('div');
     noteHeader.classList.add('noteHeader');
     
@@ -84,7 +109,7 @@ function clickPopup(){
 
     //date inside noteHeader
         noteDate = document.createElement('p');
-        noteDate.innerHTML = '4/20/24';
+        noteDate.innerHTML = data.date;
         noteHeader.append(noteDate);
         noteDate.classList.add("noteDate");
 
@@ -92,13 +117,13 @@ function clickPopup(){
 
     //text
         noteText = document.createElement('p');
-        noteText.innerHTML = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.";
+        noteText.innerHTML = data.content;
         noteText.classList.add("noteText");
         noteDiv.append(noteText);
 
     //name
         noteName = document.createElement('p');
-        noteName.innerHTML = "- gabe gibb";
+        noteName.innerHTML = data.username;
         noteName.classList.add("noteName");
 
         noteDiv.append(noteName);
@@ -231,10 +256,10 @@ AFRAME.registerComponent('read-note', {
       var data = this.data;
       var el = this.el;  // <a-box>
       var defaultColor = el.getAttribute('material').color;
-      console.log('test')
+     
       el.addEventListener('mouseenter', function () {
         setTimeout(() => {
-            clickPopup();
+            clickPopup(el);
         }, 1000);
 
         // el.setAttribute('color', data.color);

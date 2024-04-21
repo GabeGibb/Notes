@@ -43,6 +43,9 @@ def get_note(id):
 @app.route('/notes')
 def get_notes():
     notes = db.query("SELECT * FROM notes;")
+    for note in notes:
+        user = db.query("SELECT * FROM users WHERE id = %s;", (note['user_id'],))
+        note['user'] = user[0] if user else None
     latitude = request.args.get('latitude', type=float)
     longitude = request.args.get('longitude', type=float)
     if latitude is None or longitude is None:
@@ -59,6 +62,10 @@ def get_notes():
             note['longitude_distance_feet'] = haversine((latitude, longitude), (latitude, note_longitude), unit=Unit.FEET) if note_longitude >= longitude else -haversine((latitude, longitude), (latitude, note_longitude), unit=Unit.FEET)
             note['distance'] = distance
             notes_within_distance.append(note)
+    # Sort the notes by distance
+    notes_within_distance.sort(key=lambda note: note['distance'])
+    # Get the 10 closest notes
+    notes_within_distance = notes_within_distance[:10]
     return {"notes": notes_within_distance}
 
 @app.route('/notes', methods=['POST'])
