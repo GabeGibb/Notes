@@ -21,7 +21,7 @@ export default function MemoDetails() {
         let memo = {};
         let message = data.message;
         memo.id = message.id;
-        memo.date = '4/20/24';
+        memo.date = '4/21/24';
         memo.views = 10;
         memo.message = message.content;
         memo.iconSrc = 'img/dumb_dog.PNG';

@@ -21,7 +21,7 @@ export default function MemoHistory() {
         for (let i = 0; i < data.messages.length; i++) {
             let memo = {};
             memo.id = data.messages[i].id;
-            memo.date = '4/20/24';
+            memo.date = '4/21/24';
             memo.views = 10;
             memo.message = data.messages[i].content;
             memo.iconSrc = 'img/dumb_dog.PNG';
