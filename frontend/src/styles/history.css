@@ -18,10 +18,10 @@
 
 .exitButton {
     /* background-color: red; */
-
     height: 100%;
     width: 100%;
     background-image: url("img/close-x-exit.png");
+    background-image: url("../../public/img/close-x-exit.png");
     background-size: cover;
     cursor: pointer;
 }
@@ -53,8 +53,6 @@
     border-radius: 15px;
     width: 90%;
     height: auto;
-
-
 }
 
 .notesItem {

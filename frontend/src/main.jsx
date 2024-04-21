@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import MemoHistory from './pages/MemoHistory.jsx'
+import MemoDetails from './pages/MemoDetails.jsx';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/history" element={<MemoHistory />} />
+                <Route path="/history/:id" element={<MemoDetails />} />
             </Routes>
         </Router>
     </React.StrictMode>,

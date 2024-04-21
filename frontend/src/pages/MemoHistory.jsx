@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/history.css'
 export default function MemoHistory() {
 
@@ -14,7 +15,6 @@ export default function MemoHistory() {
 
     return (
         <div data-theme="light" className="h-screen">
-
             <div className="notesTop">
                 <div className="exitDiv">
                     <button className='exitButton'></button>
@@ -22,15 +22,12 @@ export default function MemoHistory() {
 
                 <h1 className="notesTitle">YOUR MEMOS</h1>
             </div>
-
-            {/* <div className="notesPageTitle">YOUR MEMOS</div> */}
-
             <div className="notes">
                 <img className="notesTape" src="img/tape.png" alt="tape" />
                 <ul className="notesList">
                     {notesList.map((note, index) => (
                         <React.Fragment key={note.id}>
-                            <li className="notesItem">
+                            <Link to={`/history/${note.id}`} className="notesItem">
                                 <img className="noteIcon" src={note.iconSrc} alt="note icon" />
                                 <div className="noteContent">
                                     <div className="noteData">
@@ -41,16 +38,12 @@ export default function MemoHistory() {
                                         <p>{note.message}</p>
                                     </div>
                                 </div>
-                            </li>
+                            </Link>
                             {index !== notesList.length - 1 && <hr className="notesDivider" />}
                         </React.Fragment>
                     ))}
-
-
                 </ul>
             </div>
-
-
         </div>
     )
 }

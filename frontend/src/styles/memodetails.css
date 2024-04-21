@@ -1,0 +1,36 @@
+.detailsData {
+    /* background-color: rosybrown; */
+    height: 100px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.3em;
+
+    padding: 45px 30px 0px 30px;
+}
+
+.detailsIcon {
+    /* background-color: cyan; */
+    width: 90%;
+    margin: 30px auto;
+}
+
+.detailsMessage {
+    /* background-color: greenyellow; */
+    height: auto;
+    font-size: 1.5em;
+    color: var(--memo-text, #5B5B5B);
+
+    padding: 30px;
+}
+
+.detailsUser {
+    width: 100%;
+
+    text-align: end;
+    font-size: 1.5em;
+    color: var(--memo-text, #5B5B5B);
+
+    padding: 10px 30px;
+}
