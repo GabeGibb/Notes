@@ -144,6 +144,7 @@ const chars = ["/img/bellflowers.png",
 
 
 async function createNote(){  
+    prompt.innerHTML = "";
     curr_index = 0;
     charCount = 0;
     createNoteDiv = document.createElement('div');
