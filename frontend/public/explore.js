@@ -20,17 +20,17 @@ async function addEntities(lat, lon) {
         entity.setAttribute('gps-new-entity-place', `latitude: ${offsetLat}; longitude: ${offsetLon}`);
         scene.appendChild(entity);
       }
-    for (let i = 0; i < data.notes.length; i++) {   
+    for (let i = 0; i < data.notes.length; i++) {  
+        // let note = data.notes[i];
         // const offsetLat = lat + (Math.random() - 0.5) * 0.0005;
         // const offsetLon = lon + (Math.random() - 0.5) * 0.0005;
-        // let note = data.notes[i];
         // let entity = document.createElement('a-entity');
         // entity.setAttribute('material', 'color: red');
-        // // entity.setAttribute('value', note.content);
         // entity.setAttribute('geometry', 'primitive: box');
         // entity.setAttribute('scale', '10 10 10');
-        // entity.setAttribute('gps-new-entity-place', `latitude: ${note.latitude}; longitude: ${note.longitude}`);
-        // scene.appendChild(entity);
+        // entity.setAttribute('gps-new-entity-place', `latitude: ${offsetLat}; longitude: ${offsetLon}`);
+        // scene.appendChild(entity); 
+
       }
       console.log(scene)
     // Update the coordinates display
@@ -47,7 +47,7 @@ function updateLocation() {
     }, {
         enableHighAccuracy: true,
         maximumAge: 0,
-        timeout: 5000
+        timeout: 27000
     });
 }
 
