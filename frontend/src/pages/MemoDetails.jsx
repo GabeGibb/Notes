@@ -33,14 +33,14 @@ export default function MemoDetails() {
             </div>
 
             <div className="notes">
-                <img className="notesTape" src=" ../../public/img/tape.png" alt="tape" />
+                <img className="notesTape" src="img/tape.png" alt="tape" />
                 <div className="notesList">
                     <div className="detailsData">
                         <span>{memoDetails.views} views</span>
                         <span>{memoDetails.date}</span>
                     </div>
                     <hr className='notesDivider' />
-                    <img className="detailsIcon" src={"../../public/" + memoDetails.iconSrc} alt="note icon" />
+                    <img className="detailsIcon" src={memoDetails.iconSrc} alt="note icon" />
                     <hr className='notesDivider' />
                     <div id="detailsMessage" className='detailsMessage'>
                         <span>{memoDetails.message}</span>
