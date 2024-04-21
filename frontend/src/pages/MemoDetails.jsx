@@ -21,11 +21,14 @@ export default function MemoDetails() {
         let memo = {};
         let message = data.message;
         memo.id = message.id;
-        memo.date = '4/21/24';
-        memo.views = 10;
+        let date = new Date(message.date);
+        let formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+        memo.date = formattedDate;
+        memo.views = message.views;
         memo.message = message.content;
-        memo.iconSrc = 'img/dumb_dog.PNG';
-        
+        memo.iconSrc = message.imgname;
+        // memo.username = message.user.username;
+        console.log(memo)
         setMemoDetails(memo);
     }
 

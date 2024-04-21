@@ -24,7 +24,7 @@ export default function MemoHistory() {
             memo.date = '4/21/24';
             memo.views = 10;
             memo.message = data.messages[i].content;
-            memo.iconSrc = 'img/dumb_dog.PNG';
+            memo.iconSrc = data.messages[i].imgname;
             details.push(memo);
         }
         setNotesList(details);
