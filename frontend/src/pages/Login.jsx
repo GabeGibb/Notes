@@ -1,9 +1,11 @@
-import {BackArrow} from '../components/Icons';
+import { BackArrow } from '../components/Icons';
 import { useEffect, useState } from 'react';
+import '../styles/login.css'
 export default function Login() {
     const [username, setUsername] = useState('');
+    const [error, setError] = useState(false);
 
-    async function createUser(){
+    async function createUser() {
         const response = await fetch('http://127.0.0.1:5000/users', {
             method: 'POST',
             headers: {
@@ -13,6 +15,7 @@ export default function Login() {
         });
         const data = await response.json();
         if (data.error !== undefined) {
+            setError(true);
             return;
         }
         localStorage.setItem('username', username);
@@ -22,7 +25,7 @@ export default function Login() {
 
         window.location.href = '/explore.html';
     }
-    
+
 
 
     return (
@@ -35,14 +38,15 @@ export default function Login() {
                 <img src="login_duck.png" className="m-auto w-56 mb-19" alt="splash"></img>
                 <h2 className="text-4xl mb-4">What should we call you?</h2>
                 <div className="mb-12">
-                    <input className="w-72 align-text-bottom text-center text-base border-b-2 border-light-green h-14" type="text" placeholder="enter your cool username..." onChange={(e) => setUsername(e.target.value)}></input>
+                    <input id="user-input" className="w-72 align-text-bottom text-center text-base border-b-2 border-light-green h-14 flex flex-col" type="text" placeholder="enter your cool username..." onChange={(e) => setUsername(e.target.value)}></input>
+                    {error && <span className="user-error">Sorry! This username already exists.</span>}
                 </div>
                 <button className="btn border-0 rounded-full bg-light-green w-72 shadow-custom" onClick={() => createUser()}>
                     <p className="font-Poppins text-white text-sm font-medium">start exploring</p>
                 </button>
                 <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mt-14" width="25" height="11" viewBox="0 0 32 11" fill="none">
-                    <circle cx="5.5" cy="5.42078" r="5" fill="#D9D9D9"/>
-                    <circle cx="26.5" cy="5.42078" r="5" fill="#FFD9D9"/>
+                    <circle cx="5.5" cy="5.42078" r="5" fill="#D9D9D9" />
+                    <circle cx="26.5" cy="5.42078" r="5" fill="#FFD9D9" />
                 </svg>
             </div>
         </div>
