@@ -1,14 +1,4 @@
 body, html { margin: 0; height: 100%; overflow: hidden; }
-#video-background {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    background-size: cover;
-}
 .fullscreen {
     width: 100vw;
     height: 100vh;
@@ -16,4 +6,5 @@ body, html { margin: 0; height: 100%; overflow: hidden; }
 
 #coordinates{
     z-index: 9000;
+    position: absolute;
 }

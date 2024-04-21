@@ -1,0 +1,101 @@
+.notesTop {
+    /* background-color: pink; */
+    text-align: center;
+    margin: 0 2.5%;
+    padding: 30px 0;
+}
+
+.notesTitle {
+    /* background-color: aqua; */
+    font-size: 2.5em;
+}
+
+.exitDiv {
+    /* background-color: grey; */
+    width: 30px;
+    height: 30px;
+}
+
+.exitButton {
+    /* background-color: red; */
+
+    height: 100%;
+    width: 100%;
+    background-image: url("img/close-x-exit.png");
+    background-size: cover;
+    cursor: pointer;
+}
+
+
+.notes {
+    /* background-color: blue; */
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    font-size: 1.25em;
+    color: #AF9F78;
+}
+
+.notesTape {
+    position: absolute;
+    top: -10px;
+}
+
+.notesList {
+    background-color: #FFF9EA;
+    border-radius: 15px;
+    width: 90%;
+    height: auto;
+
+
+}
+
+.notesItem {
+    /* background-color: orange; */
+    width: 100%;
+    height: 180px;
+
+
+    padding: 30px;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.noteIcon {
+    height: 100%;
+}
+
+.noteContent {
+    /* background-color: purple; */
+
+    padding-left: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+.noteData {
+    /* background-color: aqua; */
+    height: 50%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.noteMessage {
+    /* background-color: yellow; */
+    height: 50%;
+
+    color: var(--memo-text, #5B5B5B);
+}
+
+.notesDivider {
+    border: 1px solid #AF9F78;
+}
